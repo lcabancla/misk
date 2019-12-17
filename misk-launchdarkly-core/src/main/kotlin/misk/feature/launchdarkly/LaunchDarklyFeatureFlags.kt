@@ -93,7 +93,7 @@ class LaunchDarklyFeatureFlags @Inject constructor(
   }
 
   private fun buildUser(feature: Feature, key: String, attributes: Attributes): LDUser {
-    FeatureFlagValidation.checkValidKey(feature, key)
+    require(key.isNotEmpty()) { "Key to flag $feature must not be empty" }
     val builder = LDUser.Builder(key)
     attributes.text.forEach { (k, v) ->
       when (k) {
